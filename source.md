@@ -532,3 +532,5 @@ H:
 
 ## Workshop
 
+> Implement a hierarchical design for your integer sequences,
+taking into account different visual representations along it
