@@ -18,7 +18,7 @@
 
 H:
 
-# Objects part 1
+# Polymorphism
 
 by some [National University of Colombia collaborators](https://github.com/orgs/objetos/people)
 
@@ -26,306 +26,107 @@ H:
 
 # Index
 
- 1. Program paradigms (brief overview) <!-- .element: class="fragment" data-fragment-index="1"-->
- 1. Using an object <!-- .element: class="fragment" data-fragment-index="2"-->
- 1. Declaring an object <!-- .element: class="fragment" data-fragment-index="3"-->
- 1. Initializing an object <!-- .element: class="fragment" data-fragment-index="4"-->
- 1. Calling object methods <!-- .element: class="fragment" data-fragment-index="5"-->
+ 1. Introduction <!-- .element: class="fragment" data-fragment-index="1"-->
+ 1. Inheritance <!-- .element: class="fragment" data-fragment-index="2"-->
+ 1. Polymorphism <!-- .element: class="fragment" data-fragment-index="3"-->
  
 H:
 
 ## Introduction
 
-1. Program paradigms brief overview
-1. Object Oriented Programming (OPP) Paradigm
+We already know:
+
+<li class="fragment"> An object is a _data structure_ for storing user-defined _attributes_ (which may be other objects even of the same type), and _methods_ to manipulate them
+<li class="fragment"> To use an object: Declare & initialize it and then call functions on it
 
 V:
 
-## Introduction: Program paradigms
+## Introduction
 
-> A fundamental style of computer programming, serving as a way of building the programs
+We may ask now for ways to relate objects different than inclusion
 
-more [here](http://objetos.github.io/structured_programming)
-
-V:
-
-## Introduction: Program paradigms
-
-1. Machine code
-2. Asembly language
-3. Structured Programming (SP is detailed [here](http://objetos.github.io/structured_programming))
-4. Object Oriented Programming (OOP)
-5. Other paradigms
-  * [Declarative programming](https://en.wikipedia.org/wiki/Declarative_programming)
-  * [Functional programming](https://en.wikipedia.org/wiki/Functional_programming)
-  * [Logic programming](https://en.wikipedia.org/wiki/Logic_programming)
-  * [Symbolic programming](https://en.wikipedia.org/wiki/Symbolic_programming)
-
-V:
-
-## Introduction: OOP
-
-Langs that described programs as a group of mutually interactive _objects_
-
-<li class="fragment"> An object is a _data structure_ for storing user-defined _attributes_ (data or fields), and _methods_ to manipulate them
+> That's where Inheritance & Polymorphism comes into the picture
 
 H:
 
-## Using an object
+## Inheritance
+What is?
 
-> Consider the problem of visually representing the Fibonacci sequence as a tile of squares with different hue values
-
-V:
-
-## Using an object
-An SP design would require:
-
-1. Data (Global Variables)
-  * Fibonacci terms (```squares```)
-  * Hue value
-2. Setup
-  * Initialize hue value
-3. Draw:
-  * for_each square:
-    compute_color,
-    draw
+> Is when an object or class A is based on another object or class B
 
 V:
 
-## Using an object
-SP implementation
+## Inheritance
+We say:
+
+<li class="fragment"> A is _sublass_ of B
+<li class="fragment"> B is _superclass_ of A
+<li class="fragment"> A and B form a _class hierarchy_
+
+V:
+
+## Inheritance
+
+<figure>
+    <img height='400' src='fig/single_inheritance.jpg' />
+    <figcaption>Single inheritance</figcaption>
+</figure>
+
+V:
+
+## Inheritance
+
+<figure>
+    <img height='400' src='fig/multiple_inheritance.jpg' />
+    <figcaption>Multiple inheritance</figcaption>
+</figure>
+
+V:
+
+## Inheritance
+
+<figure>
+    <img height='400' src='fig/multilevel_inheritance.jpg' />
+    <figcaption>Multilevel inheritance</figcaption>
+</figure>
+
+V:
+
+## Inheritance
+Advantages
+
+<li class="fragment"> It is a mechanism for code reuse
+<li class="fragment"> It allows (independent) extensions of the original software via public classes and interfaces
+
+V:
+
+## Inheritance
+Example:
+
+> Consider the problem of visually representing some integer sequences as a tile of squares with different hue values
+
+V:
+
+## Inheritance
+Example
+
+We are going to declare a _superclass_ *Sequence*
+and two _subclasses_ *Fibonacci* and *Padovan*
+
+V:
+
+## Inheritance
+Example
 
 ```java
-// 1. Global variables
-int squares;
-color hue;
-
-int fibonacci(int n) {
-  if(n == 1)
-    return 0;
-  if(n == 2)
-    return 1;
-  if( n > 2)
-    return fibonacci(n-2) + fibonacci(n-1);
-  return -1; 
-}
-
-void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  squares = 5;
-  // 2. Initialize data
-  hue = 90;
-  noLoop();
-}
-
-// 3. Implement the functionality
-void draw() {
-  int square_width = width / squares;
-  for(int i = 0; i < squares; i++) {
-    fill(hue, 100, map(fibonacci(i+1), 0, fibonacci(squares), 0, 100));
-    rect(i*square_width,0,square_width,50);
-  }
-}
-
-```
-
-V:
-
-## Using an object
-
-<li class="fragment"> OOP allows us to take all of the variables and functions out of the main program and store them inside a _Fibonacci object_
-<li class="fragment"> A _Fibonacci object_ will know about its _data_ (hue)
-<li class="fragment"> The object will also know about the _methods_ to manipulate its _data_ (_compute_,_display_, etc.)
-
-V:
-
-## Using an object
-In our case an OOP design would thus require:
-
-* Data (Global Variables)
-  Fibonacci object
-* Setup
-  Initialize the Fibonacci object
-* Draw
-  Display the Fibonacci object
-
-V:
-
-## Using an object
-...something like this:
-
-```java
-// Step 1. Declare an object
-Fibonacci sequence;
-
-void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  // Step 2. Initialize object
-  sequence = new Fibonacci();
-  noLoop();
-}
-
-void draw() {
-  // Step 3. Call methods on the object
-  sequence.display(10);
-}
-```
-
-V:
-
-## Using an object
-where the Fibonacci object may be implemented as:
-
-```java
-class Fibonacci {
-  color hue = 90;
-  
-  int compute(int n) {
-    if (n == 1)
-      return 0;
-    if (n == 2)
-      return 1;
-    if ( n > 2)
-      return compute(n-2) + compute(n-1);
-    return -1;
-  }
-
-  void display(int terms) {
-    int square_width = width / terms;
-    for (int i = 0; i < terms; i++) {
-      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      rect(i*square_width, 0, square_width, 50);
-    }
-  }
-}
-```
-
-H:
- 
-## Declaring an object
-
-Remember how it's done with primitive data types
-
-```java
-int var;
-```
-
-V:
- 
-## Declaring an object
-
-in OOP it's done similarly:
-
-```java
-Fibonacci sequence;
-```
-
-H:
-
-## Initializing an object
-
-Remember how it's done with primitive data types
-
-```java
-var = 10;
-```
-
-V:
-
-## Initializing an object
-
-in OOP it's done with an 'object constructor'
-
-```java
-sequence = new Fibonacci();
-```
-
-The constructor that takes no arguments is known as the default constructor.
-They don't require an explicit implementation that others do. <!-- .element: class="fragment" data-fragment-index="1"-->
-
-V:
-
-## Initializing an object
-
-> Suppose now that we want our Fibonacci visual representation to change its placement according to our mouse y-position
-
-V:
-
-## Initializing an object
-
-We could declare a new Fibonacci attribute to represent its visual placement:
-
-```java
-int yPos;
-```
-
-V:
-
-## Initializing an object
-
-and two methods to set/get its value:
-
-```java
-void setHeight(int h) {
-    yPos = h;
-  }
-  
-  int height() {
-    return yPos;
-  }
-```
-
-V:
-
-## Initializing an object
-
-finally, we can also implement a non-default constructor to set out ```height()``` attribute:
-
-```java
-Fibonacci(int h) {
- setHue(h);
-}
-
-```
-
-V:
-
-## Initializing an object
-
-our global data, ```setup()``` and ```draw()``` global methods will now look like:
-
-```java
-Fibonacci sequence;
-
-void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  // Note here the new non-default constructor call
-  sequence = new Fibonacci(120);
-}
-
-void draw() {
-  background(0);
-  sequence.setHeight(mouseY);
-  sequence.display(10);
-}
-```
-
-V:
-
-## Initializing an object
-
-an our ```Fibonacci``` implementation like this:
-
-```java
-class Fibonacci {
+// Superclass Sequence
+class Sequence {
   color hue;
   int yPos;
   
-  Fibonacci(int h) {
-    setHue(h);
+  Sequence() {
+    setHue(120);
+    setHeight(height/2);
   }
   
   void setHeight(int h) {
@@ -343,7 +144,17 @@ class Fibonacci {
   color hue() {
     return hue;
   }
+}
+```
 
+V:
+
+## Inheritance
+Example
+
+```java
+// Subclass Fibonacci
+class Fibonacci extends Sequence {
   int compute(int n) {
     if (n == 1)
       return 0;
@@ -353,34 +164,371 @@ class Fibonacci {
       return compute(n-2) + compute(n-1);
     return -1;
   }
-
+  
   void display(int terms) {
     int square_width = width / terms;
     for (int i = 0; i < terms; i++) {
       fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      // note that we now pass our height() attribute
-      // as a parameter type to the Processing rect() method
       rect(i*square_width, height(), square_width, 50);
     }
   }
 }
 ```
 
-H:
+V:
 
-## Calling object methods
-Functions are called with the "dot syntax", like this:
+## Inheritance
+Example
 
 ```java
-sequence.setHeight(mouseY);
-sequence.display(10);
+// Subclass Padovan
+class Padovan extends Sequence {
+  int compute(int n) {
+    if (n == 1 || n == 2 || n == 3)
+      return 1;
+    if ( n > 3)
+      return compute(n-2) + compute(n-3);
+    return -1;
+  }
+  
+  void display(int terms) {
+    int square_width = width / terms;
+    for (int i = 0; i < terms; i++) {
+      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
+      rect(i*square_width, height(), square_width, 50);
+    }
+  }
+}
+```
 
+V:
+
+## Inheritance
+Example
+
+```java
+// Object declaration
+Fibonacci fSeq;
+Padovan pSeq;
+int term = 12;
+
+void setup() {
+  size(720,640);
+  colorMode(HSB, 360, 100, 100);
+  // Object instantiation
+  fSeq = new Fibonacci();
+  pSeq = new Padovan();
+}
+
+void draw() {
+  background(0);
+  // Object use:
+  fSeq.setHeight(mouseY);
+  fSeq.display(5);
+}
+
+void keyPressed() {
+  // Object use:
+  println(term + " term Fibonacci value is: " + fSeq.compute(term));
+  println(term + " term Padovan value is: " + pSeq.compute(term));
+}
+```
+
+H:
+
+## Polymorphism
+What is?
+
+> is the provision of a single interface to entities of different types
+[Bjarne Stroustrup (February 19, 2007). "Bjarne Stroustrup's C++](http://www.stroustrup.com/glossary.html#Gpolymorphism)
+
+V:
+
+## Polymorphism
+Types
+
+1. Ad hoc polymorphism <!-- .element: class="fragment" data-fragment-index="1"-->
+1. Parametric polymorphism <!-- .element: class="fragment" data-fragment-index="2"-->
+1. Subtyping <!-- .element: class="fragment" data-fragment-index="3"-->
+
+H:
+
+## Ad hoc polymorphism
+
+> when a function denotes different implementations depending on a limited range of individually specified types
+
+Supported in many languages via function overloading <!-- .element: class="fragment" data-fragment-index="1"-->
+
+V:
+
+## Function overloading
+Continuing our previous example:
+
+```java
+// Subclass Padovan
+class Padovan extends Sequence {
+  int compute(int n) {
+    if (n == 1 || n == 2 || n == 3)
+      return 1;
+    if ( n > 3)
+      return compute(n-2) + compute(n-3);
+    return -1;
+  }
+  
+  void display(int terms) {
+    int square_width = width / terms;
+    for (int i = 0; i < terms; i++) {
+      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
+      rect(i*square_width, height(), square_width, 50);
+    }
+  }
+  
+  // Method overloading
+  void display() {
+    display(5);
+  }
+}
+```
+
+V:
+
+## Function overloading
+Continuing our previous example:
+
+```java
+// Object declaration
+Fibonacci fSeq;
+Padovan pSeq;
+int term = 12;
+
+void setup() {
+  size(720,640);
+  colorMode(HSB, 360, 100, 100);
+  // Object instantiation
+  fSeq = new Fibonacci();
+  pSeq = new Padovan();
+}
+
+void draw() {
+  background(0);
+  // Object use:
+  pSeq.setHeight(mouseY);
+  // Call to the overloaded method
+  pSeq.display();
+}
+
+void keyPressed() {
+  // Object use:
+  println(term + " term Fibonacci value is: " + fSeq.compute(term));
+  println(term + " term Padovan value is: " + pSeq.compute(term));
+}
+```
+
+H:
+
+## Parametric polymorphism
+
+> when code is written without mention of any specific type and thus can
+be used transparently with any number of new types
+
+V:
+
+## Parametric polymorphism
+Also known as:
+
+* _Generic programming_ in the OOP community
+* _Polymorphism_ in the in the functional programming community
+
+H:
+
+## Subtyping
+
+> when a name denotes instances of many different classes related by some common superclass
+
+V:
+
+## Subtyping
+Also known as:
+
+* _Polymorphism_ in the OOP community
+
+V:
+
+## Subtyping
+Suppose A is a subtype of B
+
+We not only say:
+
+<li class="fragment"> A is _sublass_ of B
+<li class="fragment"> B is _superclass_ of A
+<li class="fragment"> A and B form a _class hierarchy_
+
+
+V:
+
+## Subtyping
+
+but also:
+
+any term of type A can be _safely used_ in a context where a term of type B is expected
+
+V:
+
+## Subtyping
+Advantages:
+
+<li class="fragment"> It encourages _data abstraction_
+<li class="fragment"> It allows _code simplicity_
+
+V:
+
+## Subtyping
+Continuing our previous example:
+
+```java
+// Superclass Sequence
+abstract class Sequence { 
+  abstract int compute(int n);
+  
+  color hue;
+  int yPos;
+  
+  Sequence() {
+    setHue(120);
+    setHeight(height/2);
+  }
+  
+  void setHeight(int h) {
+    yPos = h;
+  }
+  
+  int height() {
+    return yPos;
+  }
+  
+  void setHue(color h) {
+    hue = h;
+  }
+  
+  color hue() {
+    return hue;
+  }
+  
+  // this function is common among different
+  // Sequence subtypes, so we moved it here
+  void display(int terms) {
+    int square_width = width / terms;
+    for (int i = 0; i < terms; i++) {
+      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
+      rect(i*square_width, height(), square_width, 50);
+    }
+  }
+  
+  // Method overloading
+  void display() {
+    display(5);
+  }
+}
+```
+
+V:
+
+## Subtyping
+Continuing our previous example:
+
+```java
+// Subclass Fibonacci
+class Fibonacci extends Sequence {
+  Fibonacci() {
+    setHue(0);
+  }
+  
+  @Override
+  int compute(int n) {
+    if (n == 1)
+      return 0;
+    if (n == 2)
+      return 1;
+    if ( n > 2)
+      return compute(n-2) + compute(n-1);
+    return -1;
+  }  
+}
+```
+
+V:
+
+## Subtyping
+Continuing our previous example:
+
+```java
+// Subclass Padovan
+class Padovan extends Sequence {
+  Padovan() {
+    setHue(180);
+  }
+  
+  @Override
+  int compute(int n) {
+    if (n == 1 || n == 2 || n == 3)
+      return 1;
+    if ( n > 3)
+      return compute(n-2) + compute(n-3);
+    return -1;
+  }
+}
+```
+
+V:
+
+## Subtyping
+Continuing our previous example:
+
+```java
+// Object declaration
+Sequence sequence;
+boolean padovan; // false by default, so we begin with Fibonacci
+
+void setup() {
+  size(720,640);
+  colorMode(HSB, 360, 100, 100);
+  // We cannot initialize an 'abstract object'
+  // only 'concrete' ones:
+  sequence = new Fibonacci();
+}
+
+void draw() {
+  background(0);
+  // Object use:
+  sequence.setHeight(mouseY);
+  sequence.display();
+}
+
+void keyPressed() {
+  padovan = !padovan;
+  // both Fibonacci and Padovan object instances
+  // may be assigned to the superclass sequence object:
+  sequence = padovan ? new Padovan() : new Fibonacci();
+}
 ```
 
 H:
 
 ## References
 
-* [Daniel Shiftman Objects tutorial](https://processing.org/tutorials/objects/)
-* [Processing "class"](https://processing.org/reference/class.html)
-* [Processing "object"](https://processing.org/reference/Object.html)
+* [Inheritance](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)
+* [Bjarne Stroustrup (February 19, 2007). "Bjarne Stroustrup's C++](http://www.stroustrup.com/glossary.html#Gpolymorphism)
+* [Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)
+* [Subtyping](https://en.wikipedia.org/wiki/Subtyping)
+
+V:
+
+## Further reading:
+
+* [Is-a relationship](https://en.wikipedia.org/wiki/Is-a)
+* [Java Interfaces](https://en.wikipedia.org/wiki/Interface_(Java)
+
+H:
+
+## Workshop
+

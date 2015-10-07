@@ -11,8 +11,8 @@ Made possible thanks to...
 ## Installation
 
  ```sh
- $ git clone https://github.com/VisualComputing/objects2.git
- $ cd objects2
+ $ git clone https://github.com/VisualComputing/polymorphism.git
+ $ cd polymorphism
  $ git checkout gh-pages
  ```
 
@@ -37,7 +37,7 @@ External markdown and speaker notes, require that presentations run from a local
 
 2. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
 
-3. Install dependencies (you must be already on the presentation folder, otherwise ```$ cd objects2```)
+3. Install dependencies (you must be already on the presentation folder, otherwise ```$ cd polymorphism```)
 
  ```sh
  $ npm install
