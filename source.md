@@ -43,7 +43,7 @@ V:
 
 ## Introduction
 
-We may ask now for ways to relate objects different than inclusion
+We may ask now for ways to relate objects different than [composition](https://en.wikipedia.org/wiki/Object_composition)
 
 > That's where Inheritance & Polymorphism comes into the picture
 
