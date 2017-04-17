@@ -53,15 +53,15 @@ H:
 ## Inheritance
 What is?
 
-> Is when an object or class A is based on another object or class B
+> Is when an object or class B is based on another object or class A
 
 V:
 
 ## Inheritance
 We say:
 
-<li class="fragment"> A is _sublass_ of B
-<li class="fragment"> B is _superclass_ of A
+<li class="fragment"> B is _sublass_ of A
+<li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
 
 V:
@@ -335,10 +335,11 @@ be used transparently with any number of new types
 V:
 
 ## Parametric polymorphism
+
 Also known as:
 
 * _Generic programming_ in the OOP community
-* _Polymorphism_ in the in the functional programming community
+* _Polymorphism_ in the functional programming community
 
 H:
 
@@ -349,6 +350,7 @@ H:
 V:
 
 ## Subtyping
+
 Also known as:
 
 * _Polymorphism_ in the OOP community
@@ -356,12 +358,13 @@ Also known as:
 V:
 
 ## Subtyping
-Suppose A is a subtype of B
+
+Suppose B is a subtype of A (often written as $B <: A$)
 
 We not only say:
 
-<li class="fragment"> A is _sublass_ of B
-<li class="fragment"> B is _superclass_ of A
+<li class="fragment"> B is _sublass_ of A
+<li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
 
 
@@ -371,11 +374,12 @@ V:
 
 but also:
 
-any term of type A can be _safely used_ in a context where a term of type B is expected
+any term of type B can be _safely used_ in a context where a term of type A is expected
 
 V:
 
 ## Subtyping
+
 Advantages:
 
 <li class="fragment"> It encourages _data abstraction_
@@ -384,6 +388,7 @@ Advantages:
 V:
 
 ## Subtyping
+
 Continuing our previous example:
 
 ```processing
