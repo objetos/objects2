@@ -1,4 +1,4 @@
-## Object Oriented Programming Slides -- Structured Programming Overview
+## Object Oriented Programming Slides -- Polymorphism
 
 Part of the *Object Oriented Programming* course given at [National University of Colombia](http://www.disi.unal.edu.co/).
 
