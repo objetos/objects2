@@ -338,7 +338,7 @@ V:
 
 Also known as:
 
-* _Generic programming_ in the OOP community
+* [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) in the OOP community
 * _Polymorphism_ in the functional programming community
 
 H:
