@@ -538,5 +538,5 @@ H:
 
 ## Workshop
 
-> Implement a hierarchical design for your integer sequences,
+> Implement a hierarchical design for your [tangram](https://en.wikipedia.org/wiki/Tangram),
 taking into account different visual representations along it
