@@ -1,24 +1,26 @@
-Sequence sequence;
-boolean padovan; // false by default, so we begin with Fibonacci
+// Object declaration
+Fibonacci fSeq;
+Padovan pSeq;
+int term = 12;
 
 void setup() {
-  size(720, 640);
+  size(720,640);
   colorMode(HSB, 360, 100, 100);
-  // We cannot initialize an 'abstract object'
-  // only 'concrete' ones:
-  sequence = new Fibonacci();
+  // Object instantiation
+  fSeq = new Fibonacci();
+  pSeq = new Padovan();
 }
 
 void draw() {
   background(0);
   // Object use:
-  sequence.setHeight(mouseY);
-  sequence.display();
+  pSeq.setHeight(mouseY);
+  // Call to the overloaded method
+  pSeq.display();
 }
 
 void keyPressed() {
-  padovan = !padovan;
-  // both Fibonacci and Padovan object instances
-  // may be assigned to the superclass sequence object:
-  sequence = padovan ? new Padovan() : new Fibonacci();
+  // Object use:
+  println(term + " term Fibonacci value is: " + fSeq.compute(term));
+  println(term + " term Padovan value is: " + pSeq.compute(term));
 }
