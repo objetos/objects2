@@ -1,5 +1,4 @@
 class Rectangle extends Node {
-  @Override
   void display() {
     pushStyle();
     rectMode(CENTER);
@@ -14,7 +13,6 @@ class Rectangle extends Node {
     popStyle();
   }
 
-  @Override
   boolean pick(int x, int y) {
     return abs(x-position().x) <= size()/2 && abs(y-position().y) <= size()/2;
   }

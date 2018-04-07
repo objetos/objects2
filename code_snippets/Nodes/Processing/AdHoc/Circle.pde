@@ -1,5 +1,4 @@
 class Circle extends Node {
-  @Override
   void display() {
     pushStyle();
     strokeWeight(5);
@@ -12,8 +11,7 @@ class Circle extends Node {
     ellipse(position.x, position.y, size, size);
     popStyle();
   }
-
-  @Override
+  
   boolean pick(int x, int y) {
     return sqrt(sq(x-position().x) + sq(y-position().y)) <= size()/2;
   }
