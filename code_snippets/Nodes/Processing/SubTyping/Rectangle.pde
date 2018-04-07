@@ -2,16 +2,20 @@ class Rectangle extends Node {
   @Override
   void display() {
     pushStyle();
-    fill(0,255,0);
-    if(pick(mouseX, mouseY))
-      fill(255,0,0);
-    ellipse(position.x, position.y, size, size);
+    rectMode(CENTER);
+    strokeWeight(5);
+    stroke(0, 0, 255);
+    fill(255, 255, 0);
+    if (pick(mouseX, mouseY)) {
+      stroke(255, 255, 0);
+      fill(0, 0, 255);
+    }
+    rect(position.x, position.y, size, size);
     popStyle();
   }
-  
+
   @Override
   boolean pick(int x, int y) {
-    float distance = sqrt(sq(position().x - x)-sq(position().y - y));
-    return distance <= size();
+    return abs(x-position().x) <= size()/2 && abs(y-position().y) <= size()/2;
   }
 }

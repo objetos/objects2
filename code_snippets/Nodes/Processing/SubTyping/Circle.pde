@@ -2,16 +2,19 @@ class Circle extends Node {
   @Override
   void display() {
     pushStyle();
-    fill(0,255,0);
-    if(pick(mouseX, mouseY))
-      fill(255,0,0);
+    strokeWeight(5);
+    stroke(255, 0, 255);
+    fill(0, 255, 0);
+    if (pick(mouseX, mouseY)) {
+      stroke(0, 255, 0);
+      fill(255, 0, 255);
+    }
     ellipse(position.x, position.y, size, size);
     popStyle();
   }
-  
+
   @Override
   boolean pick(int x, int y) {
-    float distance = sqrt(sq(x-position().x) + sq(y-position().y));
-    return distance <= size()/2;
+    return sqrt(sq(x-position().x) + sq(y-position().y)) <= size()/2;
   }
 }
