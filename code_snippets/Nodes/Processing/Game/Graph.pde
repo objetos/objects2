@@ -1,7 +1,8 @@
-/*
-Un grafo esta compuesto de un conjunto de nodos y
- un conjunto de lineas.
+/**
+ Un grafo esta compuesto de un conjunto de nodos
+ y un conjunto de lineas.
  */
+
 class Graph {
   // 1. Attributes
   Node[] nodes;

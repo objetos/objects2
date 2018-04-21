@@ -1,6 +1,7 @@
-/*
-Nodo de forma rectangular.
-*/
+/**
+ Nodo de forma rectangular.
+ */
+
 class Rectangle extends Node {
   @Override
   void display() {

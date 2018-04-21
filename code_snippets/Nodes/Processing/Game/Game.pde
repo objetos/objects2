@@ -1,6 +1,6 @@
-/*
-Para cambiar el 'nivel' presione cualquier tecla
-*/
+/**
+ Para cambiar el 'nivel' presione cualquier tecla
+ */
 
 Graph[] levels;
 // total, current por defecto vale 0

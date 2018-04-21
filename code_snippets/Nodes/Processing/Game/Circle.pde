@@ -1,6 +1,7 @@
-/*
-Nodo de forma circular.
-*/
+/**
+ Nodo de forma circular.
+ */
+
 class Circle extends Node {
   @Override
   void display() {

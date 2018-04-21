@@ -1,13 +1,13 @@
-/*
-Implementacion basica de la clase linea: dibuja, pero
-el estilo no es personalizable.
-
-Implemente la personalizacion del estilo en una de dos
-formas (la que mas le suene):
-1. Mediante atributos adicionales para el estilo (como
-color, tipo de linea, etc); o,
-2. Mediante herencia (como se hace con la clase Node).
-*/
+/**
+ Implementacion basica de la clase linea: dibuja, pero
+ el estilo no es personalizable.
+ 
+ Implemente la personalizacion del estilo en una de dos
+ formas (la que mas le suene):
+ 1. Mediante atributos adicionales para el estilo (como
+ color, tipo de linea, etc); o,
+ 2. Mediante herencia (como se hace con la clase Node).
+ */
 
 class Line {
   // 1. Attributes
@@ -25,17 +25,17 @@ class Line {
   void display() {
     pushStyle();
     strokeWeight(5);
-    stroke(255,0,255);
+    stroke(255, 0, 255);
     line(origin.position.x, origin.position.y, end.position.x, end.position.y);
     popStyle();
   }
-  
+
   // 3.3. Getters
 
   Node origin() {
     return origin;
   }
-  
+
   Node end() {
     return end;
   }
