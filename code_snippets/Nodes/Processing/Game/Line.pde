@@ -26,7 +26,7 @@ class Line {
     pushStyle();
     strokeWeight(5);
     stroke(255, 0, 255);
-    line(origin.position.x, origin.position.y, end.position.x, end.position.y);
+    line(origin().position().x, origin().position().y, end().position().x, end().position().y);
     popStyle();
   }
 
