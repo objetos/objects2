@@ -533,10 +533,3 @@ V:
 
 * [Is-a relationship](https://en.wikipedia.org/wiki/Is-a)
 * [Java Interfaces](https://en.wikipedia.org/wiki/Interface_(Java)
-
-H:
-
-## Workshop
-
-> Implement a hierarchical design for your [tangram](https://en.wikipedia.org/wiki/Tangram),
-taking into account different visual representations along it
