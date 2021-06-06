@@ -104,7 +104,7 @@ V:
 ## Inheritance
 Example:
 
-> Consider the problem of implmenting the following class hierarchy for the tangram game:
+> Consider the problem of implementing the following class hierarchy for the tangram game:
 > Rect<:Shape, Triangle<:Shape, Paralelogram<:Shape
 
 V:
@@ -206,7 +206,6 @@ Example
 ```processing
 // Object declaration
 Rect rect;
-boolean drawGrid = true;
 
 void setup() {
   size(800, 800);
@@ -214,33 +213,14 @@ void setup() {
   rect = new Rect();
 }
 
-void drawGrid(float scale) {
-  push();
-  strokeWeight(1);
-  int i;
-  for (i=0; i<=width/scale; i++) {
-    stroke(0, 0, 0, 20);
-    line(i*scale, 0, i*scale, height);
-  }
-  for (i=0; i<=height/scale; i++) {
-    stroke(0, 0, 0, 20);
-    line(0, i*scale, width, i*scale);
-  }
-  pop();
-}
-
 void draw() {
   background(255, 255, 255);
-  if (drawGrid)
-    drawGrid(10);
+  // ...
   // Object use:
   rect.draw();
 }
 
-void keyPressed() {
-  if (key == 'g' || key == 'G')
-    drawGrid = !drawGrid;
-}
+// ...
 ```
 
 H:
@@ -304,7 +284,7 @@ Continuing our previous example:
 ```processing
 // Subclass Rect
 class Rect extends Shape {
-  flo1at _edge;
+  float _edge;
 
   Rect() {
     this(100);
@@ -327,7 +307,6 @@ Continuing our previous example:
 ```processing
 // Object declaration
 Rect rect;
-boolean drawGrid = true;
 
 void setup() {
   size(800, 800);
@@ -339,8 +318,7 @@ void setup() {
 
 void draw() {
   background(255, 255, 255);
-  if (drawGrid)
-    drawGrid(10);
+  // ...
   // Object use:
   rect.draw();
 }
@@ -486,7 +464,6 @@ Continuing our previous example:
 ```processing
 // Object declaration
 Shape[] shapes;
-boolean drawGrid = true;
 
 void setup() {
   size(800, 800);
@@ -498,8 +475,7 @@ void setup() {
 
 void draw() {
   background(255, 255, 255);
-  if (drawGrid)
-    drawGrid(10);
+  // ...
   for (Shape shape : shapes)
     // Object use:
     shape.draw();
@@ -516,6 +492,7 @@ H:
 * [Bjarne Stroustrup (February 19, 2007). "Bjarne Stroustrup's C++](http://www.stroustrup.com/glossary.html#Gpolymorphism)
 * [Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)
 * [Subtyping](https://en.wikipedia.org/wiki/Subtyping)
+* [TangramRosetta](https://github.com/objetos/TangramRosetta)
 
 V:
 
