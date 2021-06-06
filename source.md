@@ -104,15 +104,8 @@ V:
 ## Inheritance
 Example:
 
-> Consider the problem of visually representing some integer sequences as a tile of squares with different hue values
-
-V:
-
-## Inheritance
-Example
-
-We are going to declare a _superclass_ *Sequence*
-and two _subclasses_ *Fibonacci* and *Padovan*
+> Consider the problem of implmenting the following class hierarchy for the tangram game:
+> Rect<:Shape, Triangle<:Shape, Paralelogram<:Shape
 
 V:
 
@@ -120,30 +113,52 @@ V:
 Example
 
 ```processing
-// Superclass Sequence
-class Sequence {
-  color hue;
-  int yPos;
-  
-  Sequence() {
-    setHue(120);
-    setHeight(height/2);
+// Superclass Shape
+class Shape {
+  float _rotation;
+  float _scaling;
+  PVector _position;
+  color _hue;
+
+  Shape() {
+    setPosition(new PVector(random(0, width), random(0, height)));
+    setRotation(random(0, TWO_PI));
+    setScaling(random(0.5, 1.5));
+    setHue(color(random(0, 255), random(0, 255), random(0, 255)));
   }
   
-  void setHeight(int h) {
-    yPos = h;
+  // setters & getters
+
+  float scaling() {
+    return _scaling;
   }
-  
-  int height() {
-    return yPos;
+
+  void setScaling(float scaling) {
+    _scaling = scaling;
   }
-  
-  void setHue(color h) {
-    hue = h;
+
+  float rotation() {
+    return _rotation;
   }
-  
+
+  void setRotation(float rotation) {
+    _rotation = rotation;
+  }
+
+  PVector position() {
+    return _position;
+  }
+
+  void setPosition(PVector position) {
+    _position = position;
+  }
+
   color hue() {
-    return hue;
+    return _hue;
+  }
+
+  void setHue(color hue) {
+    _hue = hue;
   }
 }
 ```
@@ -154,50 +169,31 @@ V:
 Example
 
 ```processing
-// Subclass Fibonacci
-class Fibonacci extends Sequence {
-  int compute(int n) {
-    if (n == 1)
-      return 0;
-    if (n == 2)
-      return 1;
-    if ( n > 2)
-      return compute(n-2) + compute(n-1);
-    return -1;
+// Subclass Rect
+class Rect extends Shape {
+  float _edge;
+
+  Rect() {
+    setEdge(100);
   }
   
-  void display(int terms) {
-    int square_width = width / terms;
-    for (int i = 0; i < terms; i++) {
-      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      rect(i*square_width, height(), square_width, 50);
-    }
+  void draw() {
+    push();
+    fill(hue());
+    translate(position().x, position().y);
+    rotate(rotation());
+    scale(scaling(), scaling());
+    rectMode(CENTER);
+    rect(0, 0, edge(), edge());
+    pop();
   }
-}
-```
 
-V:
-
-## Inheritance
-Example
-
-```processing
-// Subclass Padovan
-class Padovan extends Sequence {
-  int compute(int n) {
-    if (n == 1 || n == 2 || n == 3)
-      return 1;
-    if ( n > 3)
-      return compute(n-2) + compute(n-3);
-    return -1;
+  public float edge() {
+    return _edge;
   }
-  
-  void display(int terms) {
-    int square_width = width / terms;
-    for (int i = 0; i < terms; i++) {
-      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      rect(i*square_width, height(), square_width, 50);
-    }
+
+  public void setEdge(float edge) {
+    _edge = edge;
   }
 }
 ```
@@ -209,29 +205,41 @@ Example
 
 ```processing
 // Object declaration
-Fibonacci fSeq;
-Padovan pSeq;
-int term = 12;
+Rect rect;
+boolean drawGrid = true;
 
 void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  // Object instantiation
-  fSeq = new Fibonacci();
-  pSeq = new Padovan();
+  size(800, 800);
+  // Object instantiation:
+  rect = new Rect();
+}
+
+void drawGrid(float scale) {
+  push();
+  strokeWeight(1);
+  int i;
+  for (i=0; i<=width/scale; i++) {
+    stroke(0, 0, 0, 20);
+    line(i*scale, 0, i*scale, height);
+  }
+  for (i=0; i<=height/scale; i++) {
+    stroke(0, 0, 0, 20);
+    line(0, i*scale, width, i*scale);
+  }
+  pop();
 }
 
 void draw() {
-  background(0);
+  background(255, 255, 255);
+  if (drawGrid)
+    drawGrid(10);
   // Object use:
-  fSeq.setHeight(mouseY);
-  fSeq.display(5);
+  rect.draw();
 }
 
 void keyPressed() {
-  // Object use:
-  println(term + " term Fibonacci value is: " + fSeq.compute(term));
-  println(term + " term Padovan value is: " + pSeq.compute(term));
+  if (key == 'g' || key == 'G')
+    drawGrid = !drawGrid;
 }
 ```
 
@@ -266,28 +274,25 @@ V:
 Continuing our previous example:
 
 ```processing
-// Subclass Padovan
-class Padovan extends Sequence {
-  int compute(int n) {
-    if (n == 1 || n == 2 || n == 3)
-      return 1;
-    if ( n > 3)
-      return compute(n-2) + compute(n-3);
-    return -1;
+// Superclass Shape
+class Shape {
+  // ...
+
+  Shape() {
+    this(new PVector(random(0, width), random(0, height)),
+         random(0, TWO_PI),
+         random(0.5, 1.5),
+         color(random(0, 255), random(0, 255), random(0, 255)));
+  }
+
+  Shape(PVector position, float rotation, float scaling, color hue) {
+    setPosition(position);
+    setRotation(rotation);
+    setScaling(scaling);
+    setHue(hue);
   }
   
-  void display(int terms) {
-    int square_width = width / terms;
-    for (int i = 0; i < terms; i++) {
-      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      rect(i*square_width, height(), square_width, 50);
-    }
-  }
-  
-  // Method overloading
-  void display() {
-    display(5);
-  }
+  //...
 }
 ```
 
@@ -297,32 +302,50 @@ V:
 Continuing our previous example:
 
 ```processing
+// Subclass Rect
+class Rect extends Shape {
+  flo1at _edge;
+
+  Rect() {
+    this(100);
+  }
+
+  Rect(float edge) {
+    setEdge(edge);
+  }
+
+  // ...
+}
+```
+
+
+V:
+
+## Function overloading
+Continuing our previous example:
+
+```processing
 // Object declaration
-Fibonacci fSeq;
-Padovan pSeq;
-int term = 12;
+Rect rect;
+boolean drawGrid = true;
 
 void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  // Object instantiation
-  fSeq = new Fibonacci();
-  pSeq = new Padovan();
+  size(800, 800);
+  // Object instantiation:
+  rect = new Rect(50);
 }
+
+// ...
 
 void draw() {
-  background(0);
+  background(255, 255, 255);
+  if (drawGrid)
+    drawGrid(10);
   // Object use:
-  pSeq.setHeight(mouseY);
-  // Call to the overloaded method
-  pSeq.display();
+  rect.draw();
 }
 
-void keyPressed() {
-  // Object use:
-  println(term + " term Fibonacci value is: " + fSeq.compute(term));
-  println(term + " term Padovan value is: " + pSeq.compute(term));
-}
+// ...
 ```
 
 H:
@@ -392,48 +415,40 @@ V:
 Continuing our previous example:
 
 ```processing
-// Superclass Sequence
-abstract class Sequence { 
-  abstract int compute(int n);
-  
-  color hue;
-  int yPos;
-  
-  Sequence() {
-    setHue(120);
-    setHeight(height/2);
+// Superclass Shape
+abstract class Shape {
+  float _rotation;
+  float _scaling;
+  PVector _position;
+  color _hue;
+
+  Shape() {
+    this(new PVector(random(0, width), random(0, height)),
+         random(0, TWO_PI),
+         random(0.5, 1.5),
+         color(random(0, 255), random(0, 255), random(0, 255)));
   }
-  
-  void setHeight(int h) {
-    yPos = h;
+
+  Shape(PVector position, float rotation, float scaling, color hue) {
+    setPosition(position);
+    setRotation(rotation);
+    setScaling(scaling);
+    setHue(hue);
   }
-  
-  int height() {
-    return yPos;
+
+  void draw() {
+    push();
+    fill(hue());
+    translate(position().x, position().y);
+    rotate(rotation());
+    scale(scaling(), scaling());
+    geom();
+    pop();
   }
+
+  abstract void geom();
   
-  void setHue(color h) {
-    hue = h;
-  }
-  
-  color hue() {
-    return hue;
-  }
-  
-  // this function is common among different
-  // Sequence subtypes, so we moved it here
-  void display(int terms) {
-    int square_width = width / terms;
-    for (int i = 0; i < terms; i++) {
-      fill(hue, 100, map(compute(i+1), 0, compute(terms), 0, 100));
-      rect(i*square_width, height(), square_width, 50);
-    }
-  }
-  
-  // Method overloading
-  void display() {
-    display(5);
-  }
+  // ...
 }
 ```
 
@@ -443,44 +458,22 @@ V:
 Continuing our previous example:
 
 ```processing
-// Subclass Fibonacci
-class Fibonacci extends Sequence {
-  Fibonacci() {
-    setHue(0);
+// Subclass Rect
+class Rect extends Shape {
+  float _edge;
+
+  Rect() {
+    this(100);
   }
-  
-  @Override
-  int compute(int n) {
-    if (n == 1)
-      return 0;
-    if (n == 2)
-      return 1;
-    if ( n > 2)
-      return compute(n-2) + compute(n-1);
-    return -1;
-  }  
-}
-```
 
-V:
-
-## Subtyping
-Continuing our previous example:
-
-```processing
-// Subclass Padovan
-class Padovan extends Sequence {
-  Padovan() {
-    setHue(180);
+  Rect(float edge) {
+    setEdge(edge);
   }
-  
+
   @Override
-  int compute(int n) {
-    if (n == 1 || n == 2 || n == 3)
-      return 1;
-    if ( n > 3)
-      return compute(n-2) + compute(n-3);
-    return -1;
+  void geom() {
+    rectMode(CENTER);
+    rect(0, 0, edge(), edge());
   }
 }
 ```
@@ -492,30 +485,27 @@ Continuing our previous example:
 
 ```processing
 // Object declaration
-Sequence sequence;
-boolean padovan; // false by default, so we begin with Fibonacci
+Shape[] shapes;
+boolean drawGrid = true;
 
 void setup() {
-  size(720,640);
-  colorMode(HSB, 360, 100, 100);
-  // We cannot initialize an 'abstract object'
-  // only 'concrete' ones:
-  sequence = new Fibonacci();
+  size(800, 800);
+  shapes = new Shape[7];
+  for (int i=0; i<shapes.length; i++)
+    // We cannot initialize an 'abstract object',  only 'concrete' ones:
+    shapes[i] = new Rect();
 }
 
 void draw() {
-  background(0);
-  // Object use:
-  sequence.setHeight(mouseY);
-  sequence.display();
+  background(255, 255, 255);
+  if (drawGrid)
+    drawGrid(10);
+  for (Shape shape : shapes)
+    // Object use:
+    shape.draw();
 }
 
-void keyPressed() {
-  padovan = !padovan;
-  // both Fibonacci and Padovan object instances
-  // may be assigned to the superclass sequence object:
-  sequence = padovan ? new Padovan() : new Fibonacci();
-}
+// ...
 ```
 
 H:
