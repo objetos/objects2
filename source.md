@@ -561,4 +561,4 @@ V:
 ## Further reading:
 
 * [Multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance)
-* [Uppe type bounds](https://docs.scala-lang.org/tour/upper-type-bounds.html)
+* [Upper type bounds](https://docs.scala-lang.org/tour/upper-type-bounds.html)
