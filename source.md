@@ -74,7 +74,7 @@ V:
 ## Inheritance
 
 <figure>
-    <img height='400' src='fig/single_inheritance.jpg' />
+    <img height='400' src='fig/single_inheritance.png' />
     <figcaption>Single inheritance</figcaption>
 </figure>
 
@@ -83,7 +83,7 @@ V:
 ## Inheritance
 
 <figure>
-    <img height='400' src='fig/multiple_inheritance.jpg' />
+    <img height='400' src='fig/multiple_inheritance.png' />
     <figcaption>Multiple inheritance</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ V:
 ## Inheritance
 
 <figure>
-    <img height='400' src='fig/multilevel_inheritance.jpg' />
+    <img height='400' src='fig/multilevel_inheritance.png' />
     <figcaption>Multilevel inheritance</figcaption>
 </figure>
 
