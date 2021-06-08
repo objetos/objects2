@@ -57,7 +57,7 @@ What is?
 
 > Is when an object or class B is based on another object or class A.
 
-Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a) <!-- .element: class="fragment" data-fragment-index="1"-->
+Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a)
 
 V:
 
