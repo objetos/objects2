@@ -253,6 +253,9 @@ void setup() {
   // Object instantiation:
   rect = new Rect();
   term = new Term();
+  // Object use:
+  rect.setHue(color(255,0,0));
+  term.setHue(color(0,255,0));
 }
 
 void draw() {
