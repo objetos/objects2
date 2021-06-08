@@ -30,6 +30,8 @@ H:
  1. Introduction <!-- .element: class="fragment" data-fragment-index="1"-->
  1. Inheritance <!-- .element: class="fragment" data-fragment-index="2"-->
  1. Polymorphism <!-- .element: class="fragment" data-fragment-index="3"-->
+ 1. Workshop <!-- .element: class="fragment" data-fragment-index="4"-->
+ 1. References <!-- .element: class="fragment" data-fragment-index="5"-->
  
 H:
 
@@ -104,7 +106,8 @@ V:
 ## Inheritance
 Example:
 
-> Consider the problem of implementing the following class hierarchy for the tangram game:
+> Consider the problem of implementing the tangram game
+> from the following class hierarchy:
 > Rect<:Shape, Triangle<:Shape, Paralelogram<:Shape
 
 V:
@@ -228,17 +231,17 @@ H:
 ## Polymorphism
 What is?
 
-> is the provision of a single interface to entities of different types
-[Bjarne Stroustrup (February 19, 2007). "Bjarne Stroustrup's C++](http://www.stroustrup.com/glossary.html#Gpolymorphism)
+> Functions / methods having many forms
+
+Allows to perform a single action in different ways <!-- .element: class="fragment" data-fragment-index="1"--> 
 
 V:
 
 ## Polymorphism
-Types
+Main types
 
 1. Ad hoc polymorphism <!-- .element: class="fragment" data-fragment-index="1"-->
-1. Parametric polymorphism <!-- .element: class="fragment" data-fragment-index="2"-->
-1. Subtyping <!-- .element: class="fragment" data-fragment-index="3"-->
+2. Subtyping <!-- .element: class="fragment" data-fragment-index="3"-->
 
 H:
 
@@ -246,11 +249,15 @@ H:
 
 > when a function denotes different implementations depending on a limited range of individually specified types
 
-Supported in many languages via function overloading <!-- .element: class="fragment" data-fragment-index="1"-->
+Supported either via:
+1. Function overloading(https://en.wikipedia.org/wiki/Function_overloading) (e.g., C++, Processing, java) <!-- .element: class="fragment" data-fragment-index="1"-->
+2. [Variadic functions](https://en.wikipedia.org/wiki/Variadic_function) (e.g., C++, Processing, java, js)<!-- .element: class="fragment" data-fragment-index="2"-->
+3. Default parameter values (js)<!-- .element: class="fragment" data-fragment-index="3"-->
 
 V:
 
-## Function overloading
+## Ad hoc polymorphism
+### Function overloading
 Continuing our previous example:
 
 ```processing
@@ -278,7 +285,8 @@ class Shape {
 
 V:
 
-## Function overloading
+## Ad hoc polymorphism
+### Function overloading
 Continuing our previous example:
 
 ```processing
@@ -298,10 +306,10 @@ class Rect extends Shape {
 }
 ```
 
-
 V:
 
-## Function overloading
+## Ad hoc polymorphism
+### Function overloading
 Continuing our previous example:
 
 ```processing
@@ -328,33 +336,9 @@ void draw() {
 
 H:
 
-## Parametric polymorphism
-
-> when code is written without mention of any specific type and thus can
-be used transparently with any number of new types
-
-V:
-
-## Parametric polymorphism
-
-Also known as:
-
-* [Generic programming](https://en.wikipedia.org/wiki/Generic_programming) in the OOP community
-* _Polymorphism_ in the functional programming community
-
-H:
-
 ## Subtyping
 
-> when a name denotes instances of many different classes related by some common superclass
-
-V:
-
-## Subtyping
-
-Also known as:
-
-* _Polymorphism_ in the OOP community
+> when the same method prototype is implemented by many different clases within a class hierarchy
 
 V:
 
@@ -367,7 +351,6 @@ We not only say:
 <li class="fragment"> B is _sublass_ of A
 <li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
-
 
 V:
 
@@ -420,11 +403,11 @@ abstract class Shape {
     translate(position().x, position().y);
     rotate(rotation());
     scale(scaling(), scaling());
-    geom();
+    aspect();
     pop();
   }
 
-  abstract void geom();
+  abstract void aspect();
   
   // ...
 }
@@ -449,7 +432,7 @@ class Rect extends Shape {
   }
 
   @Override
-  void geom() {
+  void aspect() {
     rectMode(CENTER);
     rect(0, 0, edge(), edge());
   }
@@ -462,27 +445,83 @@ V:
 Continuing our previous example:
 
 ```processing
+// Subclass Rect
+class Term extends Shape {
+  String _elements;
+
+  Term() {
+    this(3, 8);
+  }
+
+  Term(String elements, float scaling) {
+    setElements(elements);
+    setScaling(scaling);
+  }
+
+  Term(int elements, float scaling) {
+    setElements(elements);
+    setScaling(scaling);
+  }
+
+  @Override
+  void aspect() {
+    noStroke();
+    text(_elements, 0, 0);
+  }
+
+  String elements() {
+    return _elements;
+  }
+
+  void setElements(String elements) {
+    _elements = elements;
+  }
+
+  void setElements(int elements) {
+    _elements = new String();
+    // see: https://discourse.processing.org/t/get-random-letters-and-put-into-a-string/28585/10
+    for (int i = 0; i < elements; i++) {
+      _elements += char (int(random (65, 65+24)));
+    }
+  }
+}
+```
+
+V:
+
+## Subtyping
+Continuing our previous example:
+
+```processing
 // Object declaration
 Shape[] shapes;
+boolean drawGrid = true;
 
 void setup() {
   size(800, 800);
   shapes = new Shape[7];
   for (int i=0; i<shapes.length; i++)
+    // Object instantation
     // We cannot initialize an 'abstract object',  only 'concrete' ones:
-    shapes[i] = new Rect();
+    shapes[i] = i < 4 ? new  Rect() : new Term();
 }
 
 void draw() {
   background(255, 255, 255);
   // ...
   for (Shape shape : shapes)
-    // Object use:
+    // Object use
     shape.draw();
 }
 
 // ...
 ```
+
+H;
+
+## Workshop
+
+Use the [TangramRosetta](https://github.com/objetos/TangramRosetta) template to implement the Tangram game.
 
 H:
 
