@@ -62,7 +62,7 @@ V:
 ## Inheritance
 We say:
 
-<li class="fragment"> B is _sublass_ of A
+<li class="fragment"> B is _sublass_ of A (often written as $B <: A$)
 <li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
 
@@ -250,7 +250,7 @@ H:
 > when a function denotes different implementations depending on a limited range of individually specified types
 
 Supported either via:
-1. Function overloading(https://en.wikipedia.org/wiki/Function_overloading) (e.g., C++, Processing, java) <!-- .element: class="fragment" data-fragment-index="1"-->
+1. [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) (e.g., C++, Processing, java) <!-- .element: class="fragment" data-fragment-index="1"-->
 2. [Variadic functions](https://en.wikipedia.org/wiki/Variadic_function) (e.g., C++, Processing, java, js)<!-- .element: class="fragment" data-fragment-index="2"-->
 3. Default parameter values (js)<!-- .element: class="fragment" data-fragment-index="3"-->
 
@@ -344,7 +344,7 @@ V:
 
 ## Subtyping
 
-Suppose B is a subtype of A (often written as $B <: A$)
+Suppose B is a subtype of A
 
 We not only say:
 
