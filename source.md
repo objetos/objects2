@@ -62,7 +62,7 @@ V:
 ## Inheritance
 We say:
 
-<li class="fragment"> B is _sublass_ of A (often written as $B <: A$)
+<li class="fragment"> B is _subclass_ of A (often written as $B <: A$)
 <li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
 
@@ -106,9 +106,8 @@ V:
 ## Inheritance
 Example:
 
-> Consider the problem of implementing the tangram game
-> from the following class hierarchy:
-> Rect<:Shape, Triangle<:Shape, Paralelogram<:Shape
+> Consider the problem of implementing the following class hierarchy:
+> Rect<:Shape, Term<:Shape, which (in part) may be useful for the Tangram game
 
 V:
 
@@ -207,13 +206,50 @@ V:
 Example
 
 ```processing
+// Subclass Term
+class Term extends Shape {
+  String _elements;
+
+  Term() {
+    setElements("Hola mundo");
+  }
+  
+  void draw() {
+    push();
+    fill(hue());
+    translate(position().x, position().y);
+    rotate(rotation());
+    scale(scaling(), scaling());
+    noStroke();
+    text(_elements, 0, 0);
+    pop();
+  }
+
+  String elements() {
+    return _elements;
+  }
+
+  void setElements(String elements) {
+    _elements = elements;
+  }
+}
+```
+
+V:
+
+## Inheritance
+Example
+
+```processing
 // Object declaration
 Rect rect;
+Term term;
 
 void setup() {
   size(800, 800);
   // Object instantiation:
   rect = new Rect();
+  term = new Term();
 }
 
 void draw() {
@@ -221,6 +257,7 @@ void draw() {
   // ...
   // Object use:
   rect.draw();
+  term.draw();
 }
 
 // ...
@@ -261,77 +298,53 @@ V:
 Continuing our previous example:
 
 ```processing
-// Superclass Shape
-class Shape {
-  // ...
+// Subclass Term
+class Term extends Shape {
+  String _elements;
 
-  Shape() {
-    this(new PVector(random(0, width), random(0, height)),
-         random(0, TWO_PI),
-         random(0.5, 1.5),
-         color(random(0, 255), random(0, 255), random(0, 255)));
+  Term() {
+    this(3, 8);
   }
 
-  Shape(PVector position, float rotation, float scaling, color hue) {
-    setPosition(position);
-    setRotation(rotation);
+  // Constructor overloaded
+  Term(String elements, float scaling) {
+    setElements(elements);
     setScaling(scaling);
-    setHue(hue);
-  }
-  
-  //...
-}
-```
-
-V:
-
-## Ad hoc polymorphism
-### Function overloading
-Continuing our previous example:
-
-```processing
-// Subclass Rect
-class Rect extends Shape {
-  float _edge;
-
-  Rect() {
-    this(100);
   }
 
-  Rect(float edge) {
-    setEdge(edge);
+  Term(int elements, float scaling) {
+    setElements(elements);
+    setScaling(scaling);
   }
 
-  // ...
+  void draw() {
+    push();
+    fill(hue());
+    translate(position().x, position().y);
+    rotate(rotation());
+    scale(scaling(), scaling());
+    noStroke();
+    text(_elements, 0, 0);
+    pop();
+  }
+
+  String elements() {
+    return _elements;
+  }
+
+  void setElements(String elements) {
+    _elements = elements;
+  }
+
+  // Method overloaded
+  void setElements(int elements) {
+    _elements = new String();
+    // see: https://discourse.processing.org/t/get-random-letters-and-put-into-a-string/28585/10
+    for (int i = 0; i < elements; i++) {
+      _elements += char (int(random (65, 65+24)));
+    }
+  }
 }
-```
-
-V:
-
-## Ad hoc polymorphism
-### Function overloading
-Continuing our previous example:
-
-```processing
-// Object declaration
-Rect rect;
-
-void setup() {
-  size(800, 800);
-  // Object instantiation:
-  rect = new Rect(50);
-}
-
-// ...
-
-void draw() {
-  background(255, 255, 255);
-  // ...
-  // Object use:
-  rect.draw();
-}
-
-// ...
 ```
 
 H:
@@ -348,7 +361,7 @@ Suppose B is a subtype of A
 
 We not only say:
 
-<li class="fragment"> B is _sublass_ of A
+<li class="fragment"> B is _subclass_ of A
 <li class="fragment"> A is _superclass_ of B
 <li class="fragment"> A and B form a _class hierarchy_
 
@@ -407,6 +420,7 @@ abstract class Shape {
     pop();
   }
 
+  // Polymorphic method
   abstract void aspect();
   
   // ...
@@ -431,6 +445,7 @@ class Rect extends Shape {
     setEdge(edge);
   }
 
+  // Polymorphic method
   @Override
   void aspect() {
     rectMode(CENTER);
@@ -445,7 +460,7 @@ V:
 Continuing our previous example:
 
 ```processing
-// Subclass Rect
+// Subclass Term
 class Term extends Shape {
   String _elements;
 
@@ -463,6 +478,7 @@ class Term extends Shape {
     setScaling(scaling);
   }
 
+  // Polymorphic method
   @Override
   void aspect() {
     noStroke();
@@ -521,7 +537,8 @@ H;
 
 ## Workshop
 
-Use the [TangramRosetta](https://github.com/objetos/TangramRosetta) template to implement the Tangram game.
+Use the [TangramRosetta](https://github.com/objetos/TangramRosetta) template to implement the Tangram game,
+from a class hierarchy such as: Rect<:Shape, Triangle<:Shape, Paralelogram<:Shape
 
 H:
 
