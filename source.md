@@ -46,7 +46,7 @@ V:
 
 ## Introduction
 
-We may ask now for ways to relate objects different than [composition](https://en.wikipedia.org/wiki/Object_composition)
+We may ask now for ways to relate objects different than [composition](https://en.wikipedia.org/wiki/Object_composition), also referred to as a [has-a relationship](https://en.wikipedia.org/wiki/Has-a)
 
 > That's where Inheritance & Polymorphism comes into the picture
 
@@ -55,7 +55,9 @@ H:
 ## Inheritance
 What is?
 
-> Is when an object or class B is based on another object or class A
+> Is when an object or class B is based on another object or class A.
+
+Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a) <!-- .element: class="fragment" data-fragment-index="1"-->
 
 V:
 
@@ -554,5 +556,4 @@ V:
 
 ## Further reading:
 
-* [Is-a relationship](https://en.wikipedia.org/wiki/Is-a)
-* [Java Interfaces](https://en.wikipedia.org/wiki/Interface_(Java)
+* [Multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance)
