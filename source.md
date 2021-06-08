@@ -55,7 +55,7 @@ H:
 ## Inheritance
 What is?
 
-> The mechanism by which more-specific elements incorporate the structure and behavior of more-general elements" (Booch, Rumbaugh, & Jacobson, 2005, p. 456)
+> "The mechanism by which more-specific elements incorporate the structure and behavior of more-general elements" (Booch, Rumbaugh, & Jacobson, 2005, p. 456)
 
 <li class="fragment"> One class defines some members (attributes and methods) and the other class inherits and may use them
 <li class="fragment"> Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a)
