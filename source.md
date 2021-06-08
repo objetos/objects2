@@ -19,7 +19,7 @@
 
 H:
 
-# Polymorphism
+# Inheritance & Polymorphism
 
 by some [National University of Colombia collaborators](https://github.com/orgs/objetos/people)
 
