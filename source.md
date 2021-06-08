@@ -287,9 +287,9 @@ H:
 > when a function denotes different implementations depending on a limited range of individually specified types
 
 Supported either via:
-1. [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) (e.g., C++, Processing, java) <!-- .element: class="fragment" data-fragment-index="1"-->
-2. [Variadic functions](https://en.wikipedia.org/wiki/Variadic_function) (e.g., C++, Processing, java, js)<!-- .element: class="fragment" data-fragment-index="2"-->
-3. Default parameter values (js)<!-- .element: class="fragment" data-fragment-index="3"-->
+<li class="fragment"> [Function overloading](https://en.wikipedia.org/wiki/Function_overloading) (e.g., C++, Processing, java)
+<li class="fragment"> [Variadic functions](https://en.wikipedia.org/wiki/Variadic_function) (e.g., C++, Processing, java, js)
+<li class="fragment"> Default parameter values (js)
 
 V:
 
