@@ -55,9 +55,10 @@ H:
 ## Inheritance
 What is?
 
-> Is when an object or class B is based on another object or class A.
+> The mechanism by which more-specific elements incorporate the structure and behavior of more-general elements" (Booch, Rumbaugh, & Jacobson, 2005, p. 456)
 
-Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a)
+<li class="fragment"> One class defines some members (attributes and methods) and the other class inherits and may use them
+<li class="fragment"> Also referred to as a [is-a relationship](https://en.wikipedia.org/wiki/Is-a)
 
 V:
 
@@ -557,3 +558,4 @@ V:
 ## Further reading:
 
 * [Multiple inheritance](https://en.wikipedia.org/wiki/Multiple_inheritance)
+* [Uppe type bounds](https://docs.scala-lang.org/tour/upper-type-bounds.html)
