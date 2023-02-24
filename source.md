@@ -22,7 +22,9 @@ H:
 # Inheritance & Polymorphism
 
 by Jean Pierre Charalambos  
-[Universidad Nacional de Colombia](https://unal.edu.co/)
+[Universidad Nacional de Colombia](https://unal.edu.co/)  
+Presentation best seen [online](https://objetos.github.io/polymorphism/)  
+See also the [source code](https://github.com/objetos/polymorphism)
 
 H:
 
